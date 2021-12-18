@@ -1,3 +1,3 @@
-mod client;
-mod error;
-mod result;
+pub mod client;
+pub mod error;
+pub mod result;
