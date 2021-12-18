@@ -4,7 +4,6 @@ use reqwest::{StatusCode, Url};
 use tuple_space::tuple::Tuple;
 
 pub struct Client {
-    base_server: Url,
     write_url: Url,
     read_url: Url,
     take_url: Url,
@@ -27,7 +26,7 @@ impl Client {
             .await?;
 
         match response.status() {
-            reqwest::StatusCode::CREATED => Ok(()),
+            StatusCode::CREATED => Ok(()),
             _ => Err(Error::ServerError),
         }
     }
@@ -41,8 +40,8 @@ impl Client {
             .await?;
 
         match response.status() {
-            reqwest::StatusCode::OK => Ok(Some(response.json::<Tuple>().await?)),
-            reqwest::StatusCode::NOT_FOUND => Ok(None),
+            StatusCode::OK => Ok(Some(response.json::<Tuple>().await?)),
+            StatusCode::NOT_FOUND => Ok(None),
             _ => Err(Error::ServerError),
         }
     }
@@ -56,8 +55,8 @@ impl Client {
             .await?;
 
         match response.status() {
-            reqwest::StatusCode::OK => Ok(Some(response.json::<Tuple>().await?)),
-            reqwest::StatusCode::NOT_FOUND => Ok(None),
+            StatusCode::OK => Ok(Some(response.json::<Tuple>().await?)),
+            StatusCode::NOT_FOUND => Ok(None),
             _ => Err(Error::ServerError),
         }
     }
@@ -76,7 +75,6 @@ impl Builder {
 
         Ok(Client {
             http_client: reqwest::Client::new(),
-            base_server,
             read_url,
             take_url,
             write_url,
