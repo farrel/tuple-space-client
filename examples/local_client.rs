@@ -11,7 +11,7 @@ async fn main() {
 
     let tuple = Tuple::builder().add_string("Number").add_integer(5).build();
 
-    client.write_tuple(&tuple).await.unwrap();
+    client.write(&tuple).await.unwrap();
     println!("Wrote: {}", tuple);
 
     let query_tuple = Tuple::builder()
@@ -20,14 +20,14 @@ async fn main() {
         .build();
 
     println!("Query: {}", query_tuple);
-    let read_tuple = client.read_tuple(&query_tuple).await.unwrap().unwrap();
+    let read_tuple = client.read(&query_tuple).await.unwrap().unwrap();
     println!("Read {}", read_tuple);
 
     println!("Query: {}", query_tuple);
-    let take_tuple = client.take_tuple(&query_tuple).await.unwrap().unwrap();
+    let take_tuple = client.take(&query_tuple).await.unwrap().unwrap();
     println!("Take {}", take_tuple);
 
     println!("Query: {}", query_tuple);
-    let no_tuple = client.take_tuple(&query_tuple).await.unwrap();
+    let no_tuple = client.take(&query_tuple).await.unwrap();
     println!("Take {:?}", no_tuple);
 }

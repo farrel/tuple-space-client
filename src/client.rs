@@ -17,7 +17,7 @@ impl Client {
         Builder::new()
     }
 
-    pub async fn write_tuple(&self, tuple: &Tuple) -> Result<()> {
+    pub async fn write(&self, tuple: &Tuple) -> Result<()> {
         let response = self
             .http_client
             .post(self.write_url.clone())
@@ -31,7 +31,7 @@ impl Client {
         }
     }
 
-    pub async fn read_tuple(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
+    pub async fn read(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
         let response = self
             .http_client
             .post(self.read_url.clone())
@@ -46,7 +46,7 @@ impl Client {
         }
     }
 
-    pub async fn take_tuple(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
+    pub async fn take(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
         let response = self
             .http_client
             .post(self.take_url.clone())
