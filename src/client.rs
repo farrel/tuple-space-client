@@ -69,9 +69,9 @@ impl Builder {
 
     pub fn build(&self, server: &str) -> Result<Client> {
         let base_server = Url::parse(server)?;
-        let read_url = base_server.join("read_tuple")?;
-        let take_url = base_server.join("take_tuple")?;
-        let write_url = base_server.join("write_tuple")?;
+        let read_url = base_server.join("read")?;
+        let take_url = base_server.join("take")?;
+        let write_url = base_server.join("write")?;
 
         Ok(Client {
             http_client: reqwest::Client::new(),
