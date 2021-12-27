@@ -19,14 +19,14 @@ use tuple_space_client::client::Client;
 async fn main() {
     let client = Client::builder().build("http://localhost:8000").unwrap();
 
-    let tuple = Tuple::builder().add_string("Number").add_integer(5).build();
+    let tuple = Tuple::builder().string("Number").integer(5).build();
 
     client.write(&tuple).await.unwrap();
     println!("Wrote: {}", tuple);
 
     let query_tuple = Tuple::builder()
-        .add_string("Number")
-        .add_integer_type()
+        .string("Number")
+        .any_integer()
         .build();
 
     println!("Query: {}", query_tuple);
