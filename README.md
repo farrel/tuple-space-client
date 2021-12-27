@@ -4,9 +4,44 @@
 
 A tuple space is a method for coordinating data between different processes in an asynchronous manner. Processes write tuples of data to the tuple space and then read or remove data from the tuple space using a tuple as template to match against.
 
-This client is based on the [tuple-space](https://github.com/farrel/tuple-space) crate. The corresponding [tuple-space-server](https://github.com/farrel/tuple-space-server) crate can be used to store tuples.
+This client is based on the [tuple-space](https://github.com/farrel/tuple-space) crate. The corresponding [tuple-space-server](https://github.com/farrel/tuple-space-server) can be used to store tuples.
 
 ## Usage
+```rust
+extern crate tokio;
+extern crate tuple_space;
+extern crate tuple_space_client;
+
+use tuple_space::tuple::Tuple;
+use tuple_space_client::client::Client;
+
+#[tokio::main]
+async fn main() {
+    let client = Client::builder().build("http://localhost:8000").unwrap();
+
+    let tuple = Tuple::builder().add_string("Number").add_integer(5).build();
+
+    client.write(&tuple).await.unwrap();
+    println!("Wrote: {}", tuple);
+
+    let query_tuple = Tuple::builder()
+        .add_string("Number")
+        .add_integer_type()
+        .build();
+
+    println!("Query: {}", query_tuple);
+    let read_tuple = client.read(&query_tuple).await.unwrap().unwrap();
+    println!("Read {}", read_tuple);
+
+    println!("Query: {}", query_tuple);
+    let take_tuple = client.take(&query_tuple).await.unwrap().unwrap();
+    println!("Take {}", take_tuple);
+
+    println!("Query: {}", query_tuple);
+    let no_tuple = client.take(&query_tuple).await.unwrap();
+    println!("Take {:?}", no_tuple);
+}
+```
 
 ## License (3-Clause BSD License)
 
