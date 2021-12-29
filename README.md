@@ -4,9 +4,7 @@
 
 A tuple space is a method for coordinating data between different processes in an asynchronous manner. Processes write tuples of data to the tuple space and then read or remove data from the tuple space using a tuple as template to match against.
 
-This client is based on the [tuple-space](https://github.com/farrel/tuple-space) crate. The corresponding [tuple-space-server](https://github.com/farrel/tuple-space-server) can be used to store tuples.
-
-
+This client is based on the [tuple-space](https://github.com/farrel/tuple-space) crate. The corresponding [tuple-space-server](https://github.com/farrel/tuple-space-server) is used to store tuples.
 
 ## Usage
 ```rust
