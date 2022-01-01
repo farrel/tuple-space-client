@@ -1,4 +1,4 @@
-# tuple-space-server - An HTTP based Tuple Space client
+# tuple-space-client - An HTTP based Tuple Space client
 
 ## What is a Tuple Space
 
