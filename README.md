@@ -1,4 +1,4 @@
-# tuple-space-client - An HTTP based Tuple Space client
+# tuple-space-client - An HTTP based Async Tuple Space client for Rust 
 
 ## What is a Tuple Space
 
