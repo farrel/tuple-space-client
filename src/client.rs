@@ -11,11 +11,12 @@ pub struct Client {
     http_client: reqwest::Client,
 }
 
+#[derive(Default)]
 pub struct Builder {}
 
 impl Client {
     pub fn builder() -> Builder {
-        Builder::new()
+        Builder::default()
     }
 
     pub async fn size(&self) -> Result<usize> {
@@ -73,10 +74,6 @@ impl Client {
 }
 
 impl Builder {
-    pub fn new() -> Builder {
-        Builder {}
-    }
-
     pub fn build(&self, server: &str) -> Result<Client> {
         let base_server = Url::parse(server)?;
         let size_url = base_server.join("size")?;
