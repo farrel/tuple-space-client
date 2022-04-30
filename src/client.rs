@@ -1,6 +1,7 @@
 use crate::error::Error;
 use crate::result::Result;
 use reqwest::{StatusCode, Url};
+use tuple_space::query_tuple::QueryTuple;
 use tuple_space::tuple::Tuple;
 
 pub struct Client {
@@ -42,7 +43,7 @@ impl Client {
         }
     }
 
-    pub async fn read(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
+    pub async fn read(&self, tuple: &QueryTuple) -> Result<Option<Tuple>> {
         let response = self
             .http_client
             .post(self.read_url.clone())
@@ -57,7 +58,7 @@ impl Client {
         }
     }
 
-    pub async fn take(&self, tuple: &Tuple) -> Result<Option<Tuple>> {
+    pub async fn take(&self, tuple: &QueryTuple) -> Result<Option<Tuple>> {
         let response = self
             .http_client
             .post(self.take_url.clone())
